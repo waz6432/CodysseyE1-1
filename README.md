@@ -20,8 +20,8 @@
 - [x] `hello-world` 실행
 - [x] Dockerfile 빌드/실행
 - [x] 포트 매핑 접속 (2회)
-- [ ] 바인드 마운트 반영
-- [ ] 볼륨 영속성
+- [x] 바인드 마운트 반영
+- [x] 볼륨 영속성
 - [x] Git 설정 + VSCode GitHub 연동
 
 ---
@@ -98,7 +98,7 @@ COPY ./app/index.html /usr/share/nginx/html/index.html
 EXPOSE 80
 ```
 
-**💻 `빌드 및 로그 확인`**
+**💻 `빌드 및 로그`**
 ```bash
 # 커스텀 이미지 빌드 (이름: my-web-app)
 waz64326348@c4r7s3 Developer % docker build -t my-web-app .
@@ -107,11 +107,14 @@ waz64326348@c4r7s3 Developer % docker build -t my-web-app .
 waz64326348@c4r7s3 Developer % docker images
 ```
 
-**💻 `포트 매핑 로그`**
-```bash
-# 포트 매핑(8080:80)과 바인드 마운트(-v 호스트절대경로:컨테이너경로) 적용
-docker run -d --name my-web-container -p 8080:80 -v $(pwd)/app:/usr/share/nginx/html my-web-app
+### 5-4. Docker 컨테이너 설정
 
+**💻 `포트 매핑 및 로그`**
+```bash
+# 포트 매핑(8080:80)
+docker run -d --name my-web-container -p 8080:80 my-web-app
+
+# 접속 로그
 curl localhost:8080
 <h1>Hello OrbStack! This is my Web Server.</h1>
 
@@ -119,14 +122,51 @@ curl localhost:8080
 docker rm -f my-web-container
 my-web-container
 
-# 포트 매핑(8081:80)과 바인드 마운트(-v 호스트절대경로:컨테이너경로) 적용
-docker run -d --name my-web-container -p 8081:80 -v $(pwd)/app:/usr/share/nginx/html my-web-app
+# 포트 매핑(8081:80)
+docker run -d --name my-web-container -p 8081:80 my-web-app
 
+# 접속 로그
 curl localhost:8081
-<h1>Hello OrbStack! (Bind Mount Test)</h1>
+<h1>Hello OrbStack! This is my Web Server.</h1>
 
 # 실행 중인 컨테이너 상태 확인
 docker ps
+```
+
+**💻 `바인드마운트 설정 및 로그`**
+```bash
+# 기존 컨테이너 삭제
+docker rm -f my-web-container
+my-web-container
+
+# 포트 매핑(8080:80)과 바인드 마운트(-v 호스트절대경로:컨테이너경로) 적용
+docker run -d --name my-web-container -p 8080:80 -v $(pwd)/app:/usr/share/nginx/html my-web-app
+
+# 호스트(내 PC)의 파일 내용을 변경하여 바인드 마운트가 잘 작동하는지 테스트
+echo "<h1>Hello OrbStack! (Bind Mount Test)</h1>" > app/index.html
+
+# 접속 로그
+curl localhost:8080
+<h1>Hello OrbStack! (Bind Mount Test)</h1>
+
+# 로그 확인
+docker inspect my-web-container --format '{{ json .Mounts }}' | python3 -m json.tool
+```
+
+**💻 `볼륨 설정 및 로그`**
+```bash
+# 기존 컨테이너 삭제
+docker rm -f my-web-container
+my-web-container
+
+# 새 볼륨 생성
+docker volume create my-web-vol
+
+# 포트 매핑(8080:80)과 볼륨 적용
+docker run -d --name my-web-container -p 8080:80 -v my-web-vol:/usr/share/nginx/html my-web-app
+
+# 로그 확인
+docker inspect my-web-container --format '{{ json .Mounts }}' | python3 -m json.tool
 ```
 
 ---
