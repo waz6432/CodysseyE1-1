@@ -32,31 +32,32 @@
 waz64326348@c4r7s3 ~ % pwd
 /Users/waz64326348
 
-# 'projects' 폴더로 이동 (실행 후 프롬프트의 경로가 ~ 에서 ~/projects 로 변경됨)
-waz64326348@c4r7s3 ~ % cd projects
-
-# 현재 폴더 내부의 파일 및 폴더 목록 간단히 확인
-waz64326348@c4r7s3 ~/projects % ls
-memo.txt  src  README.md
-
-# 특정 폴더의 상세 정보 확인 (내부 내용이 아닌 폴더 자체의 정보 및 상태 변경 시간 표시)
-waz64326348@c4r7s3 ~ % ls -alcd projects
-drwxr-xr-x  4 waz64326348  staff  128  4  1 11:10 projects
+# 'Developer' 폴더로 이동
+waz64326348@c4r7s3 ~ % cd Developer
+waz64326348@c4r7s3 Developer %
 
 # 파일 생성 및 첫 번째 줄 작성 (> 기호는 덮어쓰기 또는 새 파일 생성)
-waz64326348@c4r7s3 ~ % echo "리눅스 명령어 연습 중입니다." > memo.txt
+waz64326348@c4r7s3 Developer % echo "리눅스 명령어 연습 중입니다." > memo.txt
+
+# 현재 폴더 내부의 파일 및 폴더 목록 간단히 확인
+waz64326348@c4r7s3 Developer % ls
+memo.txt
+
+# 특정 폴더의 상세 정보 확인 (내부 내용이 아닌 폴더 자체의 정보 및 상태 변경 시간 표시)
+waz64326348@c4r7s3 Developer % ls -al memo.txt
+-rw-r--r--  1 waz64326348  waz64326348  48 Mar 31 19:39 memo.txt
 
 # 기존 파일에 새로운 줄 추가 (>> 기호는 기존 내용 아래에 추가)
-waz64326348@c4r7s3 ~ % echo "이 텍스트는 cat 명령어를 통해 터미널에 출력됩니다." >> memo.txt
+waz64326348@c4r7s3 Developer % echo "이 텍스트는 cat 명령어를 통해 터미널에 출력됩니다." >> memo.txt
 
 # 특정 파일의 내용 전체 출력
-waz64326348@c4r7s3 ~ % cat memo.txt
+waz64326348@c4r7s3 Developer % cat memo.txt
 리눅스 명령어 연습 중입니다.
 이 텍스트는 cat 명령어를 통해 터미널에 출력됩니다.
 
 # 터미널 화면 지우기 (실행 시 이전 출력 내용이 모두 지워지고 아래처럼 프롬프트만 상단에 나타남)
-waz64326348@c4r7s3 ~ % clear
-waz64326348@c4r7s3 ~ %
+waz64326348@c4r7s3 Developer % clear
+waz64326348@c4r7s3 Developer %
 ```
 
 ---
