@@ -32,6 +32,13 @@
 waz64326348@c4r7s3 ~ % pwd
 /Users/waz64326348
 
+# 'projects' 폴더로 이동 (실행 후 프롬프트의 경로가 ~ 에서 ~/projects 로 변경됨)
+waz64326348@c4r7s3 ~ % cd projects
+
+# 현재 폴더 내부의 파일 및 폴더 목록 간단히 확인
+waz64326348@c4r7s3 ~/projects % ls
+memo.txt  src  README.md
+
 # 특정 폴더의 상세 정보 확인 (내부 내용이 아닌 폴더 자체의 정보 및 상태 변경 시간 표시)
 waz64326348@c4r7s3 ~ % ls -alcd projects
 drwxr-xr-x  4 waz64326348  staff  128  4  1 11:10 projects
