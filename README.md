@@ -26,7 +26,7 @@
 
 ---
 
-## ⚙️ 3. 터미널 기본 조작
+## 🖥️ 3. 터미널 기본 조작
 리눅스 터미널 기본조작
 
 ### 💻 수행 로그
@@ -101,7 +101,7 @@ COPY ./app/index.html /usr/share/nginx/html/index.html
 EXPOSE 80
 ```
 
-**💻 빌드 및 로그 확인**
+**💻 `빌드 및 로그 확인`**
 ```bash
 # 커스텀 이미지 빌드 (이름: my-web-app)
 waz64326348@c4r7s3 Developer % docker build -t my-web-app .
@@ -110,7 +110,7 @@ waz64326348@c4r7s3 Developer % docker build -t my-web-app .
 waz64326348@c4r7s3 Developer % docker images
 ```
 
-**📄 `포트 매핑 로그`**
+**💻 `포트 매핑 로그`**
 ```bash
 # 포트 매핑(8080:80)과 바인드 마운트(-v 호스트절대경로:컨테이너경로) 적용
 docker run -d --name my-web-container -p 8080:80 -v $(pwd)/app:/usr/share/nginx/html my-web-app
