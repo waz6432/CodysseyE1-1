@@ -26,7 +26,19 @@
 
 ---
 
-## ⚙️ 3. Git 설치 및 설정
+## ⚙️ 3. 터미널 기본 조작
+리눅스 터미널 기본조작
+
+### 💻 수행 로그
+```bash
+pwd 
+ls -al
+cd [폴더명]
+cat [파일명]
+clear
+```
+
+## ⚙️ 4. Git 설치 및 설정
 Git 버전을 확인하고, 전역 사용자 정보 및 기본 브랜치를 설정했습니다.
 
 ### 💻 수행 로그
@@ -51,9 +63,9 @@ init.defaultbranch=main
 
 ---
 
-## 🐳 4. Docker 설치 및 웹 서버 구성
+## 🐳 5. Docker 설치 및 웹 서버 구성
 
-### 4-1. Docker 구동 및 검증
+### 5-1. Docker 구동 및 검증
 ```bash
 # Docker 버전 확인
 waz64326348@c4r7s3 ~ % docker --version
@@ -63,7 +75,7 @@ Docker version 28.5.2, build ecc6942
 waz64326348@c4r7s3 ~ % docker info
 ```
 
-### 4-2. 디렉토리 구성 및 권한 검증
+### 5-2. 디렉토리 구성 및 권한 검증
 ```bash
 # app 폴더 생성 및 html 파일 작성
 waz64326348@c4r7s3 Developer % mkdir app
@@ -75,7 +87,7 @@ waz64326348@c4r7s3 Developer % ls -al app/index.html
 -rw-r--r--  1 waz64326348  waz64326348  48 Mar 31 19:39 app/index.html
 ```
 
-### 4-3. Dockerfile 작성 및 빌드
+### 5-3. Dockerfile 작성 및 빌드
 
 **📄 `Dockerfile`**
 ```dockerfile
@@ -99,7 +111,7 @@ waz64326348@c4r7s3 Developer % docker images
 ```
 
 **📄 `포트 매핑 로그`**
-```포트 매핑 로그
+```bash
 # 포트 매핑(8080:80)과 바인드 마운트(-v 호스트절대경로:컨테이너경로) 적용
 docker run -d --name my-web-container -p 8080:80 -v $(pwd)/app:/usr/share/nginx/html my-web-app
 
@@ -122,9 +134,9 @@ docker ps
 
 ---
 
-## 🔐 5. 파일 권한 변경 실습
+## 🔐 6. 파일 권한 변경 실습
 
-```권한 실습 로그
+```bash
 # 변경 전 권한 확인
 # 구분 - 타입 / 소유자 / 그룹 / 나머지
 ls -l app/index.html
@@ -141,7 +153,7 @@ ls -l app/index.html
 
 ---
 
-## 🚨 6. 트러블 슈팅
+## 🚨 7. 트러블 슈팅
 
 ### ⚠️ 1. Issue: 디렉토리 부재로 인한 파일 생성 오류
 
@@ -158,23 +170,23 @@ ls -l app/index.html
   파일을 생성하기 전 `mkdir app` 명령어를 통해 상위 폴더를 먼저 생성하여 정상적으로 해결 완료했습니다.
 
 
-  ### ⚠️ 2. Issue: 바인드 마운트 시 403 권한 에러 및 파일 누락 현상
+### ⚠️ 2. Issue: 바인드 마운트 시 403 권한 에러 및 파일 누락 현상
 
 - **증상 및 원인**
   docker run으로 포트 8081과 바인드 마운트를 설정하여 컨테이너를 실행했으나, 브라우저 접속 시 403 Permission 에러가 발생하고 파일을 찾을 수 없었다.
-  바인드 마운트 시 사용한 $(pwd)/app 경로가 문제일 것이다. 터미널의 현재 위치가 프로젝트 루트가 아닌 다른 곳에 있어서, Nginx 컨테이너에 잘못된(비어있는) 폴더가 마운트되었을 것이다.
+  바인드 마운트 시 사용한 `$(pwd)/app` 경로가 문제일 것이다. 터미널의 현재 위치가 프로젝트 루트가 아닌 다른 곳에 있어서, Nginx 컨테이너에 잘못된(비어있는) 폴더가 마운트되었을 것이다.
 
 - **오류 로그**
   ```bash
   curl localhost:8081
-    <html>
-    <head><title>403 Forbidden</title></head>
-    <body>
-    <center><h1>403 Forbidden</h1></center>
-    <hr><center>nginx/1.29.7</center>
-    </body>
-    </html>
+  <html>
+  <head><title>403 Forbidden</title></head>
+  <body>
+  <center><h1>403 Forbidden</h1></center>
+  <hr><center>nginx/1.29.7</center>
+  </body>
+  </html>
   ```
 
 - **해결 방안 ✅**
-  터미널에서 pwd와 ls 명령어로 현재 위치를 확인해 본 결과, 경로가 엇갈려 있음을 확인했다. cd 명령어를 통해 Dockerfile과 app 디렉토리가 있는 프로젝트 최상단으로 이동한 뒤, 다시 컨테이너를 실행(docker run ...)하여 정상 접속을 확인했다.
+  터미널에서 `pwd`와 `ls` 명령어로 현재 위치를 확인해 본 결과, 경로가 엇갈려 있음을 확인했다. `cd` 명령어를 통해 Dockerfile과 app 디렉토리가 있는 프로젝트 최상단으로 이동한 뒤, 다시 컨테이너를 실행(`docker run ...`)하여 정상 접속을 확인했다.
