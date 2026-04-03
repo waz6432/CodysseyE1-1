@@ -123,7 +123,7 @@ For more examples and ideas, visit:
  https://docs.docker.com/get-started/
 ```
 
-### 5-1. Docker 구동 및 검증
+### 5-2. Docker 구동 및 검증
 ```bash
 # Docker 버전 확인
 waz64326348@c4r7s3 ~ % docker --version
@@ -230,7 +230,7 @@ WARNING: DOCKER_INSECURE_NO_IPTABLES_RAW is set
 waz64326348@c4r4s7 ~ % 
 ```
 
-### 5-2. 디렉토리 구성 및 권한 검증
+### 5-3. 디렉토리 구성 및 권한 검증
 ```bash
 # app 폴더 생성 및 html 파일 작성
 waz64326348@c4r7s3 Developer % mkdir app
@@ -242,7 +242,7 @@ waz64326348@c4r7s3 Developer % ls -al app/index.html
 -rw-r--r--  1 waz64326348  waz64326348  48 Mar 31 19:39 app/index.html
 ```
 
-### 5-3. Dockerfile 작성 및 빌드
+### 5-4. Dockerfile 작성 및 빌드
 
 **📄 `Dockerfile`**
 ```dockerfile
@@ -297,7 +297,7 @@ my-web-app   latest    ea8fb85c7b08   5 minutes ago   62.2MB
 
 ```
 
-### 5-4. Docker 컨테이너 설정
+### 5-5. Docker 컨테이너 설정
 
 **💻 `포트 매핑 및 로그`**
 ```bash
